@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - Velvet Touch</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <nav>
+      <a href="index.html"><img src="assets/logo.png" alt="Velvet Touch Logo" class="h-10"></a>
+      <ul>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Your Shopping Cart</h1>
+    <div id="cart-items"></div>
+    <div id="cart-summary">
+      <h3>Total: $<span id="cart-total">0.00</span></h3>
+      <button id="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Velvet Touch. All rights reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script>
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function updateCartPage() {
+      const cartItemsDiv = document.getElementById("cart-items");
+      const cartTotalSpan = document.getElementById("cart-total");
+      const cartCount = document.getElementById("cart-count");
+
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach((item, index) => {
+          total += item.price * item.qty;
+
+          const div = document.createElement("div");
+          div.classList.add("cart-item");
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-thumb">
+            <div>
+              <h4>${item.name}</h4>
+              <p>$${item.price.toFixed(2)} x ${item.qty}</p>
+              <button onclick="removeItem(${index})">Remove</button>
+            </div>
+          `;
+          cartItemsDiv.appendChild(div);
+        });
+      }
+
+      cartTotalSpan.textContent = total.toFixed(2);
+      cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartPage();
+    }
+
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      alert("Checkout process coming soon!");
+    });
+
+    // Initialize cart on page load
+    updateCartPage();
+  </script>
+</body>
+</html>
