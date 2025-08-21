@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velvet Touch - Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <nav>
+      <a href="index.html"><img src="assets/logo.png" alt="Velvet Touch Logo" class="h-10"></a>
+      <ul>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Velvet Touch</h1>
+    <p>Your trusted destination for intimate wellness & pleasure products.</p>
+    <a href="shop.html" class="btn">Shop Now</a>
+  </section>
+
+  <!-- Featured Categories -->
+  <section class="categories">
+    <h2>Explore Our Collections</h2>
+    <div class="category-grid">
+      <a href="shop.html#toys" class="category-card">
+        <img src="assets/sample-toy.jpg" alt="Toys">
+        <h3>Toys</h3>
+      </a>
+      <a href="shop.html#lingerie" class="category-card">
+        <img src="assets/sample-lingerie.jpg" alt="Lingerie">
+        <h3>Lingerie</h3>
+      </a>
+      <a href="shop.html#lubricants" class="category-card">
+        <img src="assets/sample-lube.jpg" alt="Lubricants">
+        <h3>Lubricants</h3>
+      </a>
+      <a href="shop.html#bondage" class="category-card">
+        <img src="assets/sample-bondage.jpg" alt="Bondage">
+        <h3>Bondage</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Stay Updated</h2>
+    <p>Subscribe for special offers & product updates.</p>
+    <form>
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Velvet Touch. All rights reserved.</p>
+    <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script>
+    // Update cart count from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+  </script>
+</body>
+</html>
